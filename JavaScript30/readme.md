@@ -6,7 +6,7 @@ Starter Files + Completed solutions for the JavaScript 30 Day Challenge.
 
 Grab the course at [https://JavaScript30.com](https://JavaScript30.com)
 
-# ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- #
+# -------------------------------------------------------------------------- #
 How this started:
 
   I have accepted the challenge of [https://JavaScript30.com] and I will share each individual resolution by me, with its corresponding files.
