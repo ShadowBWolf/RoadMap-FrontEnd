@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Type Ahead 👀</title>
   <link rel="stylesheet" href="style.css">
   <link rel="icon" href="https://fav.farm/🔥" />
 </head>
+
 <body>
 
   <form class="search-form">
@@ -15,9 +17,49 @@
       <li>or a state</li>
     </ul>
   </form>
-<script>
-const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+  <script>
+    const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
 
-</script>
+    const cities = [];
+
+    fetch(endpoint)
+      .then(bunch => bunch.json())
+      .then(data => cities.push(data));
+
+    function searchMatches(search, cities) {
+      return cities.filter(place => {
+        const model = RegExp(search, "gi");
+        return place.city.match(model) || place.state.match(model);
+      })
+    }
+
+    function numberWithCommas(x) {
+      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    }
+
+    function showMatches() {
+      const matchList = searchMatches(this.value, cities);
+      const html = matchList.map(place => {
+        const model = RegExp(search, "gi");
+        const cityName = place.city.replace(model, `<span class="hl">${this.value}</span>`)
+        const stateName = place.state.replace(model, `<span class="hl">${this.value}</span>`)
+        return `
+          <li>
+            <span class="name">${cityName}, ${stateName}</span>
+            <span class="population">${numberWithCommas(place.population)}</span>
+          </li>
+          `;
+      }).join("");
+      suggestions.innerHTML = html;
+    }
+
+    const searchInput = document.querySelector(".search");
+    const suggestions = document.querySelector(".suggestions");
+
+    searchInput.addEventListener("change", showMatches);
+    searchInput.addEventListener("keyup", showMatches);
+
+  </script>
 </body>
+
 </html>
