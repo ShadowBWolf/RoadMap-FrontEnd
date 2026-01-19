@@ -1,12 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Key Detection</title>
-    <script type="text/javascript" src="./cornify.js"></script>
-    <link rel="icon" href="https://fav.farm/🔥" />
-  </head>
-  <body>
-    <script></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Key Detection</title>
+  <script type="text/javascript" src="./cornify.js"></script>
+  <link rel="icon" href="https://fav.farm/🔥" />
+</head>
+
+<body>
+  <style>
+    html {
+      background-color: #1B267D;
+    }
+  </style>
+  <script>
+    const userInput = [];
+    const password = "abcdef";
+
+    window.addEventListener("keyup", (e) => {
+      userInput.push(e.key);
+      userInput.splice(
+        -password.length - 1, userInput.length - password.length
+      )
+      console.log(e.key);
+      console.log(userInput);
+      if (userInput.join("").includes(password)) {
+        console.log("Correct!");
+      }
+    }) 
+  </script>
+</body>
+
 </html>
